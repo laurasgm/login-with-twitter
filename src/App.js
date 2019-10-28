@@ -49,7 +49,7 @@ class App extends React.Component {
     this.unregisterAuthObserver = firebase.auth().onAuthStateChanged(
         user => { this.setState({isSignedIn: !!user})
         
-        //console.log("user", user)
+        console.log("user", user)
         });
   }
   
@@ -70,15 +70,6 @@ class App extends React.Component {
   
   
   render(){
-    let positions= [{lat: 4.790638, lng: -75.690119}]
-
-    var position = positions.map((obj) =>
-        <Marker
-        onClick={this.onMarkerClick}
-        name={'Current location'}
-        position={obj.lat, obj.lng} />
-    );
-
     return (
       <div className="App">
         {this.state.isSignedIn ? (
@@ -86,8 +77,10 @@ class App extends React.Component {
           <h1>Inicio de sesion exitoso!</h1>
           <p>Bienvenido(a) {firebase.auth().currentUser.displayName}! has iniciado sesion!</p>
           <img
-            alt="Foto de Perfil" 
-            src={firebase.auth().currentUser.photoURL}/>
+            alt="Foto de Perfil"
+            width="100" height="100" 
+            src={firebase.auth().currentUser.photoURL}/> 
+            <br></br>
           <button onClick={() => firebase.auth().signOut()}>Sign-out</button> 
           <Map
             google={this.props.google}
@@ -102,9 +95,16 @@ class App extends React.Component {
             onClick={this.onMarkerClick}
             name={'Current location'}
             position={{ lat: 4.790638, lng: -75.690119}} />
+            <Marker
+            onClick={this.onMarkerClick}
+            name={'Current location'}
+            position={{ lat: 4.814469, lng: -75.699338}} />
+            <Marker
+            onClick={this.onMarkerClick}
+            name={'Current location'}
+            position={{ lat: 4.806653, lng: -75.683712}} />
       
-          {position}
-             
+    
           </Map>
           </span>
         ):(
